@@ -72,6 +72,7 @@ build() {
     cd $BUILD_DIR
     status "Building meteor bundle"
     export METEOR_WATCH_FORCE_POLLING=true
+    export METEOR_DISABLE_BUILDER_IN_PLACE=true
     meteor npm config set production
     meteor build --server-only --directory deploy --server http://localhost:3000
     cd deploy/bundle/programs/server
