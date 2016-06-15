@@ -72,6 +72,7 @@ build() {
     status "Local status"
     uname -a
     ulimit -a
+    sysctl fs.inotify.max_user_watches
     df -h
     cd $BUILD_DIR
     status "Building meteor bundle"
