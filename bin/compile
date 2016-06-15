@@ -71,7 +71,7 @@ build() {
   (
     status "uname"
     uname -a
-    statuc "ulimit"
+    status "ulimit"
     ulimit -a
     status "Max file watches"
     cat /proc/sys/fs/inotify/max_user_watches
