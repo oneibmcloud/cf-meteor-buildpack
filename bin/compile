@@ -78,10 +78,11 @@ build() {
     status "Disk space"
     df -h
     cd $BUILD_DIR
+    status "NPM Install"
+    meteor npm install --production
     status "Building meteor bundle"
     export METEOR_WATCH_FORCE_POLLING=1
     export METEOR_DISABLE_BUILDER_IN_PLACE=1
-    meteor npm config set production
     meteor build --server-only --directory deploy --server http://localhost:3000
     status "Disk usage"
     df -h
