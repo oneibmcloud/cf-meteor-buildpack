@@ -83,11 +83,11 @@ build() {
     status "Building meteor bundle"
     export METEOR_WATCH_FORCE_POLLING=1
     export METEOR_DISABLE_BUILDER_IN_PLACE=1
-    meteor build --server-only --directory deploy --server $ROOT_URL
+    meteor build --server-only --directory ../deploy
     status "Disk usage"
     df -h
     status "Installing npm dependencies"
-    cd deploy/bundle/programs/server
+    cd ../deploy/bundle/programs/server
     meteor npm install --production 2>&1 | indent
     mv $BUILD_DIR/.vendor $BUILD_DIR/vendor
   )
