@@ -67,25 +67,16 @@ install_meteor() {
 
 build() {
   (
-    status "environment"
-    env
-    status "uname"
-    uname -a
-    status "ulimit"
-    ulimit -a
-    status "Max file watches"
-    cat /proc/sys/fs/inotify/max_user_watches
-    status "Disk space"
-    df -h
     cd $BUILD_DIR
+
     status "NPM Install"
-    meteor npm install --production
+    meteor npm install
+
     status "Building meteor bundle"
     export METEOR_WATCH_FORCE_POLLING=1
     export METEOR_DISABLE_BUILDER_IN_PLACE=1
     meteor build --server-only --directory ../deploy
-    status "Disk usage"
-    df -h
+
     status "Installing npm dependencies"
     cd ../deploy/bundle/programs/server
     meteor npm install --production 2>&1 | indent
