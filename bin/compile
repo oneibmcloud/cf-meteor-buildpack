@@ -73,7 +73,7 @@ build() {
     meteor npm install
 
     status "Building meteor bundle"
-    meteor build --server-only --directory .output --verbose
+    meteor build --server-only --debug --directory .output --verbose
 
     status "Installing npm dependencies"
     cd .output/bundle/programs/server
