@@ -2,8 +2,6 @@
 
 BUILD_DIR=$1
 CACHE_DIR=$2
-METEOR_HOME=$BUILD_DIR/.meteor/local
-PATH=$METEOR_HOME/usr/bin:$METEOR_HOME/usr/lib/meteor/bin:$PATH
 
 indent() {
   c='s/^/       /'
@@ -85,7 +83,7 @@ build() {
     status "Building meteor bundle"
     export METEOR_WATCH_FORCE_POLLING=1
     export METEOR_DISABLE_BUILDER_IN_PLACE=1
-    meteor build --server-only --directory deploy --server http://localhost:3000
+    meteor build --server-only --directory deploy --server $ROOT_URL
     status "Disk usage"
     df -h
     status "Installing npm dependencies"
@@ -97,6 +95,12 @@ build() {
 
 [ ! -d $BUILD_DIR ] && mkdir $BUILD_DIR
 [ ! -d $CACHE_DIR ] && mkdir $CACHE_DIR
+
+jq=$DIR/jq
+chmod +x $jq
+DOMAIN=`echo $VCAP_APPLICATION | $jq '.uris[0]' | sed -e 's/^"//'  -e 's/"$//'`
+export ROOT_URL="http://$DOMAIN"
+status "ROOT_URL = $ROOT_URL"
 
 install_node
 install_meteor
