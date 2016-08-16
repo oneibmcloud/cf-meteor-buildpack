@@ -73,6 +73,7 @@ build() {
     meteor npm install
 
     status "Building meteor bundle"
+    export METEOR_WATCH_FORCE_POLLING=true
     meteor build --server-only --debug --directory .output --verbose
 
     status "Installing npm dependencies"
