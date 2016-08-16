@@ -73,10 +73,10 @@ build() {
     meteor npm install
 
     status "Building meteor bundle"
-    meteor build --directory ../output --verbose
+    meteor build --directory .output --verbose
 
     status "Installing npm dependencies"
-    cd ../output/bundle/programs/server
+    cd .output/bundle/programs/server
     meteor npm install --production 2>&1 | indent
     mv $BUILD_DIR/.vendor $BUILD_DIR/vendor
   )
