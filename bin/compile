@@ -69,6 +69,8 @@ install_meteor() {
 
 build() {
   (
+    status "environment"
+    env
     status "uname"
     uname -a
     status "ulimit"
